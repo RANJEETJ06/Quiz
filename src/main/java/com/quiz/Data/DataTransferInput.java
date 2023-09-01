@@ -2,8 +2,8 @@ package com.quiz.Data;
 
 import java.sql.*;
 
-public class DataTransfer {
-    public DataTransfer(String name,int score){
+public class DataTransferInput {
+    public DataTransferInput(String name, int score){
         String url="jdbc:mysql://localhost:3306/quiz";
         String user="root";
         String password="";
