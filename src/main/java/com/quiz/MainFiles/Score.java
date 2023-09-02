@@ -13,8 +13,8 @@ public class Score extends JFrame implements ActionListener {
     String n;
     int s;
     public Score(String name,int score){
-        n=name;
-        s=score;
+        this.n=name;
+        this.s=score;
         setTitle("Quiz Time");
         ImageIcon logo=new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("com/quiz/icons/ic.png")));
         setIconImage(logo.getImage());

@@ -27,7 +27,7 @@ public class Quiz extends JFrame implements ActionListener {
         setTitle("Quiz Time");
         ImageIcon logo=new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("com/quiz/icons/ic.png")));
         setIconImage(logo.getImage());
-        S=s;
+        this.S=s;
         //all questions
         Questions[0][0] = "Which is used to find and fix bugs in the Java programs.?";
         Questions[0][1] = "JVM";
@@ -266,6 +266,7 @@ public class Quiz extends JFrame implements ActionListener {
             }
             lifeLine.setVisible(life);
         } else if (e.getSource()==submit) {
+            given_Ans=1;
             submit();
         }
     }
@@ -279,7 +280,7 @@ public class Quiz extends JFrame implements ActionListener {
             if(userAnswers[i][0].equals(Answers[i][1])){
                 score+=10;
             }else{
-                score-=-1;
+                score+=-1;
             }
         }
         setVisible(false);
