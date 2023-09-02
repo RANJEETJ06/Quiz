@@ -6,7 +6,7 @@ public class DataTransferInput {
     public DataTransferInput(String name, int score){
         String url="jdbc:mysql://localhost:3306/quiz";
         String user="root";
-        String password="";
+        String password="qaz123@QAZ";
         String query="insert into quiz_score(Name,score) values('"+name+"','"+score+"')";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

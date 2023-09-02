@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Quiz extends JFrame implements ActionListener {
     public String[][] Questions =new String[10][5];
     public String[][] Answers=new String[10][2];
-    public String[][] userAnswers=new String[10][1];
+    public static String[][] userAnswers=new String[10][1];
     public static boolean life=true;
     JButton next,lifeLine,submit;
     JLabel qNo,question;
@@ -19,6 +19,10 @@ public class Quiz extends JFrame implements ActionListener {
     public static int timer=15;
     public static int count=0,score=0;
     public static String S;
+
+    public static void main(String[] args) {
+        new Quiz("Lela");
+    }
     public Quiz(String s){
         setTitle("Quiz Time");
         ImageIcon logo=new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("com/quiz/icons/ic.png")));
@@ -200,17 +204,18 @@ public class Quiz extends JFrame implements ActionListener {
                 next.setVisible(false);
                 submit.setVisible(true);
             }
-            if(count==9){//submit case
+            if(count==9){//10th Question submit case
                 if (optGroup.getSelection() == null) {
                     userAnswers[count][0] = "";
                 } else {
                     userAnswers[count][0] = optGroup.getSelection().getActionCommand();
                 }
                 for(int i=0;i<userAnswers.length;i++){
+                    System.out.println(score);
                     if(userAnswers[i][0].equals(Answers[i][1])){
                         score+=10;
                     }else {
-                        score=-1;
+                        score-=-1;
                     }
                 }
                 setVisible(false);
@@ -219,6 +224,9 @@ public class Quiz extends JFrame implements ActionListener {
                 }else{
                     new Score(S,score);
                 }
+                count=0;
+                score=0;
+                life=true;
             }else {
                 if (optGroup.getSelection() == null) {
                     userAnswers[count][0] = "";
@@ -287,8 +295,11 @@ public class Quiz extends JFrame implements ActionListener {
                 userAnswers[count][0] = optGroup.getSelection().getActionCommand();
             }
             for(int i=0;i<userAnswers.length;i++){
+                System.out.println(score+"!");
                 if(userAnswers[i][0].equals(Answers[i][1])){
-                    score+=10;
+                    score=score+10;
+                }else{
+                    score-=-1;
                 }
             }
             setVisible(false);
@@ -297,6 +308,9 @@ public class Quiz extends JFrame implements ActionListener {
             }else{
                 new Score(S,score);
             }
+            count=0;
+            score=0;
+            life=true;
             dispose();
         }
     }
