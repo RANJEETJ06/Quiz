@@ -212,8 +212,7 @@ public class Quiz extends JFrame implements ActionListener {
                 } else {
                     userAnswers[count][0] = optGroup.getSelection().getActionCommand();
                 }
-                count++;
-                start(count);
+                start(++count);
             }
         }
     }
@@ -278,14 +277,14 @@ public class Quiz extends JFrame implements ActionListener {
         }
         for(int i=0;i<userAnswers.length;i++){
             if(userAnswers[i][0].equals(Answers[i][1])){
-                score=score+1;
+                score+=10;
             }else{
                 score-=-1;
             }
         }
         setVisible(false);
         if(!life){
-            new Score(S,score-2);
+            new Score(S,score-15);
         }else{
             new Score(S,score);
         }
