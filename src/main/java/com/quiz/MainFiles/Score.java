@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class Score extends JFrame implements ActionListener {
@@ -61,7 +62,14 @@ public class Score extends JFrame implements ActionListener {
             new Login("");
             dispose();
         }else if(e.getSource()==view){
-            //to be data retrieving
+            setVisible(false);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            try {
+                new View();
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            dispose();
 
         } else{
             setVisible(false);
