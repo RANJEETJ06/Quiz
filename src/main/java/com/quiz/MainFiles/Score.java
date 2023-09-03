@@ -1,6 +1,6 @@
 package com.quiz.MainFiles;
 
-import com.quiz.Data.DataTransfer;
+import com.quiz.Data.DataTransferInput;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,12 +9,12 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class Score extends JFrame implements ActionListener {
-    JButton close,again;
+    JButton close,again,view;
     String n;
     int s;
     public Score(String name,int score){
-        n=name;
-        s=score;
+        this.n=name;
+        this.s=score;
         setTitle("Quiz Time");
         ImageIcon logo=new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("com/quiz/icons/ic.png")));
         setIconImage(logo.getImage());
@@ -39,27 +39,34 @@ public class Score extends JFrame implements ActionListener {
         display.setFont(new Font("Tahoma",Font.PLAIN,20));
         display.setForeground(Color.blue);
         add(display);
-        close=new JButton("Close");
-        close.setBounds(550,380,120,30);
-        close.addActionListener(this);
-        add(close);
         again=new JButton("Play Again");
-        again.setBounds(380,380,120,30);
+        again.setBounds(330,380,120,30);
         again.addActionListener(this);
         add(again);
+        view=new JButton("View Scores");
+        view.setBounds(481,380,120,30);
+        view.addActionListener(this);
+        add(view);
+        close=new JButton("Close");
+        close.setBounds(630,380,120,30);
+        close.addActionListener(this);
+        add(close);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==again){
             setVisible(false);
-            new DataTransfer(n,s);
+            new DataTransferInput(n,s);
             new Login("");
             dispose();
-        }else{
+        }else if(e.getSource()==view){
+            //to be data retrieving
+
+        } else{
             setVisible(false);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            new DataTransfer(n,s);
+            new DataTransferInput(n,s);
             dispose();
         }
     }

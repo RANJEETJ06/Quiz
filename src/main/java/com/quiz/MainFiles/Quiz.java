@@ -9,21 +9,21 @@ import java.util.Objects;
 public class Quiz extends JFrame implements ActionListener {
     public String[][] Questions =new String[10][5];
     public String[][] Answers=new String[10][2];
-    public String[][] userAnswers=new String[10][1];
-    public static boolean life=true;
+    public  String[][] userAnswers=new String[10][1];
+    public boolean life=true;
     JButton next,lifeLine,submit;
     JLabel qNo,question;
     JRadioButton option1,option2,option3,option4;
     ButtonGroup optGroup;
-    public static int given_Ans=0;
-    public static int timer=15;
-    public static int count=0,score=0;
-    public static String S;
+    public int given_Ans=0;
+    public int timer=15;
+    public int count=0,score=0;
+    public String S;
     public Quiz(String s){
         setTitle("Quiz Time");
         ImageIcon logo=new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("com/quiz/icons/ic.png")));
         setIconImage(logo.getImage());
-        S=s;
+        this.S=s;
         //all questions
         Questions[0][0] = "Which is used to find and fix bugs in the Java programs.?";
         Questions[0][1] = "JVM";
@@ -168,6 +168,24 @@ public class Quiz extends JFrame implements ActionListener {
         add(submit);
         start(count);
     }
+    public void start(int count){
+        qNo.setText(count+1+".");
+        question.setText(Questions[count][0]);
+
+        option1.setText(Questions[count][1]);
+        option1.setActionCommand(Questions[count][1]);
+
+        option2.setText(Questions[count][2]);
+        option2.setActionCommand(Questions[count][2]);
+
+        option3.setText(Questions[count][3]);
+        option3.setActionCommand(Questions[count][3]);
+
+        option4.setText(Questions[count][4]);
+        option4.setActionCommand(Questions[count][4]);
+
+        optGroup.clearSelection();
+    }
     public void paint(Graphics g){
         super.paint(g);
         String time=" Time Left "+timer+" seconds";
@@ -200,69 +218,36 @@ public class Quiz extends JFrame implements ActionListener {
                 next.setVisible(false);
                 submit.setVisible(true);
             }
-            if(count==9){//submit case
-                if (optGroup.getSelection() == null) {
-                    userAnswers[count][0] = "";
-                } else {
-                    userAnswers[count][0] = optGroup.getSelection().getActionCommand();
-                }
-                for(int i=0;i<userAnswers.length;i++){
-                    if(userAnswers[i][0].equals(Answers[i][1])){
-                        score+=10;
-                    }else {
-                        score=-1;
-                    }
-                }
-                setVisible(false);
-                if(!life){
-                    new Score(S,score-20);
-                }else{
-                    new Score(S,score);
-                }
+            if(count==9){//10th Question submit case
+                submit();
             }else {
                 if (optGroup.getSelection() == null) {
                     userAnswers[count][0] = "";
                 } else {
                     userAnswers[count][0] = optGroup.getSelection().getActionCommand();
                 }
-                count++;
-                start(count);
+                start(++count);
             }
         }
-    }
-    public void start(int count){
-        qNo.setText(count+1+".");
-        question.setText(Questions[count][0]);
-
-        option1.setText(Questions[count][1]);
-        option1.setActionCommand(Questions[count][1]);
-
-        option2.setText(Questions[count][2]);
-        option2.setActionCommand(Questions[count][2]);
-
-        option3.setText(Questions[count][3]);
-        option1.setActionCommand(Questions[count][3]);
-
-        option4.setText(Questions[count][4]);
-        option4.setActionCommand(Questions[count][4]);
-
-        optGroup.clearSelection();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==next){
             repaint();
-            lifeLine.setVisible(life);
+
             option1.setEnabled(true);
             option2.setEnabled(true);
             option3.setEnabled(true);
             option4.setEnabled(true);
+
+            lifeLine.setVisible(life);
             given_Ans=1;
             if(optGroup.getSelection()==null){
                 userAnswers[count][0]="";
             }else{
                 userAnswers[count][0]=optGroup.getSelection().getActionCommand();
             }
+
             if(count==8){
                 next.setVisible(false);
                 submit.setVisible(true);
@@ -281,23 +266,28 @@ public class Quiz extends JFrame implements ActionListener {
             lifeLine.setVisible(life);
         } else if (e.getSource()==submit) {
             given_Ans=1;
-            if (optGroup.getSelection() == null) {
-                userAnswers[count][0] = "";
-            } else {
-                userAnswers[count][0] = optGroup.getSelection().getActionCommand();
-            }
-            for(int i=0;i<userAnswers.length;i++){
-                if(userAnswers[i][0].equals(Answers[i][1])){
-                    score+=10;
-                }
-            }
-            setVisible(false);
-            if(!life){
-                new Score(S,score-20);
-            }else{
-                new Score(S,score);
-            }
-            dispose();
+            submit();
         }
+    }
+    public void submit(){
+        if (this.optGroup.getSelection() == null) {
+            this.userAnswers[count][0] = "";
+        } else {
+            this.userAnswers[count][0] = optGroup.getSelection().getActionCommand();
+        }
+        for(int i=0;i<userAnswers.length;i++){
+            if(this.userAnswers[i][0].equals(this.Answers[i][1])){
+                this.score+=10;
+            }else{
+                this.score-=1;
+            }
+        }
+        setVisible(false);
+        if(!life){
+            new Score(S,score-15);
+        }else{
+            new Score(S,score);
+        }
+        dispose();
     }
 }
