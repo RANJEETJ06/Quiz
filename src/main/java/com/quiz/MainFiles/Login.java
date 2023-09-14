@@ -27,7 +27,7 @@ public class Login extends JFrame implements ActionListener {
         setLocation(200,100);
         setVisible(true);
 
-        JLabel heading=new JLabel("Simple");
+        JLabel heading=new JLabel("Hello");
         heading.setBounds(570,60,300,50);
         heading.setFont(new Font("Viner Hand ITC",Font.BOLD,40));
         heading.setForeground(Color.blue);
