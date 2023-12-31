@@ -13,13 +13,15 @@ public class Score extends JFrame implements ActionListener {
     JButton close,again,view;
     String n;
     int s;
+    Color words=new Color(226,223,210);
+    Color bg=new Color(20,66,114);
     public Score(String name,int score){
         this.n=name;
         this.s=score;
         setTitle("Quiz Time");
         ImageIcon logo=new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("com/quiz/icons/ic.png")));
         setIconImage(logo.getImage());
-        getContentPane().setBackground(Color.cyan);
+        getContentPane().setBackground(bg);
         setLayout(null);
         setBounds(240,120,800,500);
         setVisible(true);
@@ -33,12 +35,12 @@ public class Score extends JFrame implements ActionListener {
         JLabel heading=new JLabel("Thank You "+name+" For Participating In Game");
         heading.setBounds(45,30,700,40);
         heading.setFont(new Font("Tahoma",Font.PLAIN,25));
-        heading.setForeground(Color.blue);
+        heading.setForeground(words);
         add(heading);
         JLabel display=new JLabel("Your Score is "+score);
         display.setBounds(450,300,200,30);
         display.setFont(new Font("Tahoma",Font.PLAIN,20));
-        display.setForeground(Color.blue);
+        display.setForeground(words);
         add(display);
         again=new JButton("Play Again");
         again.setBounds(330,380,120,30);
@@ -52,14 +54,18 @@ public class Score extends JFrame implements ActionListener {
         close.setBounds(630,380,120,30);
         close.addActionListener(this);
         add(close);
+        try{
+            new DataTransferInput(name, score);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==again){
             setVisible(false);
-            new DataTransferInput(n,s);
-            new Login("");
+            new Login("",false);
             dispose();
         }else if(e.getSource()==view){
             setVisible(false);
