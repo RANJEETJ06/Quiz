@@ -19,6 +19,8 @@ public class Quiz extends JFrame implements ActionListener {
     public int timer=15;
     public int count=0,score=0;
     public String S;
+    Color words=new Color(226,223,210);
+    Color bg=new Color(20,66,114);
     public Quiz(String s){
         setTitle("Quiz Time");
         ImageIcon logo=new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("com/quiz/icons/ic.png")));
@@ -99,7 +101,7 @@ public class Quiz extends JFrame implements ActionListener {
 
         setBounds(130,0,1000,670);
         setVisible(true);
-        getContentPane().setBackground(Color.cyan);
+        getContentPane().setBackground(bg);
         setLayout(null);
         ImageIcon i=new ImageIcon(ClassLoader.getSystemResource("com/quiz/icons/quiz .jpg"));
         JLabel image=new JLabel(i);
@@ -109,32 +111,38 @@ public class Quiz extends JFrame implements ActionListener {
         qNo=new JLabel();
         qNo.setBounds(100,400,30,20);
         qNo.setFont(new Font("Tahoma",Font.PLAIN,20));
+        qNo.setForeground(words);
         add(qNo);
 
         question=new JLabel();
         question.setBounds(130,400,800,30);
         question.setFont(new Font("Tahoma",Font.PLAIN,20));
+        question.setForeground(words);
         add(question);
 
         option1=new JRadioButton();
         option1.setBounds(120,430,500,30);
-        option1.setBackground(Color.CYAN);
+        option1.setBackground(bg);
         option1.setFont(new Font("Dialog",Font.PLAIN,18));
+        option1.setForeground(words);
         add(option1);
         option2=new JRadioButton();
         option2.setBounds(120,470,500,30);
-        option2.setBackground(Color.CYAN);
+        option2.setBackground(bg);
         option2.setFont(new Font("Dialog",Font.PLAIN,18));
+        option2.setForeground(words);
         add(option2);
         option3=new JRadioButton();
         option3.setBounds(120,510,500,30);
-        option3.setBackground(Color.CYAN);
+        option3.setBackground(bg);
         option3.setFont(new Font("Dialog",Font.PLAIN,18));
+        option3.setForeground(words);
         add(option3);
         option4=new JRadioButton();
         option4.setBounds(120,550,500,30);
-        option4.setBackground(Color.CYAN);
+        option4.setBackground(bg);
         option4.setFont(new Font("Dialog",Font.PLAIN,18));
+        option4.setForeground(words);
         add(option4);
         optGroup=new ButtonGroup();
         optGroup.add(option1);
@@ -284,7 +292,7 @@ public class Quiz extends JFrame implements ActionListener {
         }
         setVisible(false);
         if(!life){
-            new Score(S,score-15);
+            new Score(S,score-20);
         }else{
             new Score(S,score);
         }

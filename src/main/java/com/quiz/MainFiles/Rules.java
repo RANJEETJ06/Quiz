@@ -9,6 +9,7 @@ import java.util.Objects;
 public class Rules extends JFrame implements ActionListener {
     JButton back,start;
     String backToLogin;
+    Color words=new Color(226,223,210);
     public Rules(String s){
         setTitle("Quiz Time");
         ImageIcon logo=new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("com/quiz/icons/ic.png")));
@@ -16,31 +17,32 @@ public class Rules extends JFrame implements ActionListener {
         setSize(1000,500);
         setLocation(200,100);
         setVisible(true);
-        getContentPane().setBackground(Color.cyan);
+        getContentPane().setBackground(new Color(20,66,114));
         setLayout(null);
         backToLogin=s;
 
         JLabel welcomeRule=new JLabel("WelCome to Quiz Party "+s+"!");
         welcomeRule.setBounds(40,20,700,50);
         welcomeRule.setFont(new Font("Times New Roman",Font.BOLD,30));
-        welcomeRule.setForeground(Color.blue);
+        welcomeRule.setForeground(words);
         add(welcomeRule);
 
         JLabel rules=new JLabel();
         rules.setText("<html>"+
-                "1. You are trained to be a programmer and not a story teller, answer point to point" + "<br><br>" +
-                "2. Do not unnecessarily smile at the person sitting next to you, they may also not know the answer" + "<br><br>" +
-                "3. You may have lot of options in life but here all the questions are compulsory" + "<br><br>" +
-                "4. Crying is allowed but please do so quietly." + "<br><br>" +
-                "5. Only a fool asks and a wise answers (Be wise, not otherwise)" + "<br><br>" +
-                "6. Do not get nervous if your friend is answering more questions, may be he/she is doing Jai Mata Di" + "<br><br>" +
-                "7. Brace yourself, this paper is not for the faint hearted" + "<br><br>" +
-                "8. May you know more than what John Snow knows, Good Luck" + "<br><br>" +
+                "1. The quiz is on Java Programming Language" + "<br><br>" +
+                "2. The quiz consists of 10 questions" + "<br><br>" +
+                "3. Each correct answer earns the participant 10 points." + "<br><br>" +
+                "4. Each incorrect answer results in a deduction of 1 point" + "<br><br>" +
+                "5. Participants have 15 seconds to answer each question" + "<br><br>" +
+                "6. Answers must be submitted within the allocated time,Unanswered questions at the end of the time limit are considered 0." + "<br><br>" +
+                "7. Participants have one lifeline for all 10 questions," +
+                "Lifeline deducts 20 points" + "<br><br>" +
+                "8. Lifeline reveals and hides two wrong options, leaving two answer choices" + "<br><br>" +
                 "<html>"
         );
         rules.setBounds(20,90,660,350);
         rules.setFont(new Font("Times New Roman",Font.PLAIN,13));
-        rules.setForeground(Color.blue);
+        rules.setForeground(words);
         add(rules);
 
         start=new JButton("Start");
@@ -60,7 +62,7 @@ public class Rules extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==back){
             setVisible(false);
-            new Login(backToLogin);
+            new Login(backToLogin,false);
         }else{
             setVisible(false);
             new Quiz(backToLogin);
